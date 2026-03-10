@@ -94,7 +94,7 @@ class GardenManager:
 
 if __name__ == "__main__":
     gardens = GardenManager.create_garden_network(["Alice", "Bob"])
-    plants_1 = [Plant("Oak", 100),
+    plants_1 = [Plant("Oak Tree", 100),
                 FloweringPlant("Rose", 25, "red"),
                 PrizeFlower("Sunflower", 50, "yellow", 10)]
     plants_2 = [Plant("Maple", 300)]

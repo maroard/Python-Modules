@@ -34,10 +34,10 @@ class SecurePlant:
 
 if __name__ == "__main__":
     print("=== Garden Security System ===")
-    plants = [SecurePlant("Rose")]
-    print(f"Plant created: {plants[0].name}")
-    plants[0].set_height(25)
-    plants[0].set_age(30)
-    plants[0].set_height(-5)
-    plants[0].get_height()
-    print(f"Current plant: {plants[0]}")
+    plant = SecurePlant("Rose")
+    print(f"Plant created: {plant.name}")
+    plant.set_height(25)
+    plant.set_age(30)
+    plant.set_height(-5)
+    plant.get_height()
+    print(f"Current plant: {plant}")
