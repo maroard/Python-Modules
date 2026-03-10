@@ -27,36 +27,39 @@ class GardenManager:
 
     def water_plants(self):
         print("Opening watering system")
-        for plant in self.plants:
-            try:
-                if plant is None or not isinstance(plant, str):
-                    raise WaterError(f"Cannot water {plant} - invalid) plant!")
-                else:
-                    print(f"Watering {plant} - success")
-            except WaterError as error:
-                print(f"Error: {error}")
-        print("Closing watering system (cleanup)")
+        try:
+            for plant in self.plants:
+                try:
+                    if plant is None or not isinstance(plant, str):
+                        raise WaterError(f"Cannot water {plant}"
+                                         " - invalid plant!")
+                    else:
+                        print(f"Watering {plant} - success")
+                except WaterError as error:
+                    print(f"Error: {error}")
+        finally:
+            print("Closing watering system (cleanup)")
 
     @staticmethod
     def check_plant_health(plant_name, water_level, sunlight_hours):
         try:
             if plant_name is None:
-                raise ValueError("Plant name cannot be empty!")
+                raise PlantError("Plant name cannot be empty!")
             elif water_level > 10:
-                raise ValueError(f"Water level {water_level} is too high"
+                raise PlantError(f"Water level {water_level} is too high"
                                  " (max 10)")
             elif water_level < 1:
-                raise ValueError(f"Water level {water_level} is too low"
+                raise PlantError(f"Water level {water_level} is too low"
                                  " (min 1)")
             elif sunlight_hours > 12:
-                raise ValueError(f"Sunlight hours {sunlight_hours} is too high"
+                raise PlantError(f"Sunlight hours {sunlight_hours} is too high"
                                  " (max 12)")
             elif sunlight_hours < 2:
-                raise ValueError(f"Sunlight hours {sunlight_hours} is too low"
+                raise PlantError(f"Sunlight hours {sunlight_hours} is too low"
                                  " (min 2)")
             else:
                 print(f"Plant '{plant_name}' is healthy!\n")
-        except ValueError as error:
+        except PlantError as error:
             print(f"Error checking {plant_name}: {error}\n")
 
 
