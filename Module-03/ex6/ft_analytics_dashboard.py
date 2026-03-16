@@ -63,4 +63,5 @@ if __name__ == "__main__":
                         player_datas[player]["score"])
     print(f"Top performer: {top_performer}"
           f" ({player_datas[top_performer]["score"]} points"
-          f", {len(player_datas[top_performer]["achievements"])} achievements)")
+          f", {len(player_datas[top_performer]["achievements"])}"
+          " achievements)")
