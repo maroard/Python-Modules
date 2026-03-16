@@ -19,7 +19,7 @@ if __name__ == "__main__":
 
             print("\n=== Current Inventory ===")
             inventory_copy = dict(inventory)
-            while len(inventory_copy) >= 1:
+            while inventory_copy:
                 most_abundant_item = None
                 most_abundant_qty = 0
                 for item, quantity in inventory_copy.items():
@@ -27,8 +27,9 @@ if __name__ == "__main__":
                         most_abundant_item = item
                         most_abundant_qty = quantity
                 most_unit_label = "unit" if most_abundant_qty == 1 else "units"
-                print(f"{most_abundant_item}: {most_abundant_qty} {most_unit_label}"
-                      f" ({most_abundant_qty / total_items * 100:.1f})%)")
+                print(f"{most_abundant_item}:"
+                      f" {most_abundant_qty} {most_unit_label}"
+                      f" ({most_abundant_qty / total_items * 100:.1f}%)")
                 del inventory_copy[most_abundant_item]
 
             print("\n=== Inventory Statistics ===")
@@ -40,7 +41,7 @@ if __name__ == "__main__":
                 if quantity > most_abundant_qty:
                     most_abundant_item = item
                     most_abundant_qty = quantity
-                elif quantity < least_abundant_qty or least_abundant_qty == 0:
+                if quantity < least_abundant_qty or least_abundant_qty == 0:
                     least_abundant_item = item
                     least_abundant_qty = quantity
             most_unit_label = "unit" if most_abundant_qty == 1 else "units"
@@ -55,9 +56,9 @@ if __name__ == "__main__":
             scarce_items = {}
             for item, qty in inventory.items():
                 if qty < 5:
-                    scarce_items[item] = qty
+                    scarce_items.update({item: qty})
                 else:
-                    moderate_items[item] = qty
+                    moderate_items.update({item: qty})
             print(f"Moderate: {moderate_items}")
             print(f"Scarce: {scarce_items}")
             
@@ -77,8 +78,24 @@ if __name__ == "__main__":
             print(f"Restock needed: {to_restock}")
 
             print("\n=== Dictionary Properties Demo ===")
-            print(f"Dictionary keys: {inventory.keys()}")
-            print(f"Dictionary values: {inventory.values()}")
+            inventory_keys = ""
+            count = 0
+            keys_count = len(inventory.keys())
+            for key in inventory.keys():
+                inventory_keys += key
+                count += 1
+                if count < keys_count:
+                    inventory_keys += ", "
+            print(f"Dictionary keys: {inventory_keys}")
+            inventory_values = ""
+            count = 0
+            values_count = len(inventory.values())
+            for value in inventory.values():
+                inventory_values += str(value)
+                count += 1
+                if count < values_count:
+                    inventory_values += ", "
+            print(f"Dictionary values: {inventory_values}")
             print(f"Sample lookup - 'sword' in inventory:"
                   f" {bool(inventory.get("sword"))}")
 
