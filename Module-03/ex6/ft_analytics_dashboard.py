@@ -1,5 +1,6 @@
-if __name__ == "__main__":
+def main() -> None:
     print("=== Game Analytics Dashboard ===\n")
+
     player_datas = {
         "alice": {"score": 2300, "active": True,
                   "achievements": ("first kill", "level 10", "boss slayer"),
@@ -65,3 +66,7 @@ if __name__ == "__main__":
           f" ({player_datas[top_performer]["score"]} points"
           f", {len(player_datas[top_performer]["achievements"])}"
           " achievements)")
+
+
+if __name__ == "__main__":
+    main()

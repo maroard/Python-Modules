@@ -28,23 +28,32 @@ def check_plants_health():
         is_tomato_plant_watered(2)
     except PlantError as error:
         print(f"Caught PlantError: {error}\n")
+
     try:
         print("Testing WaterError...")
         is_water_tank_empty(0)
     except WaterError as error:
         print(f"Caught WaterError: {error}\n")
+
     print("Testing catching all garden errors...")
     try:
         is_tomato_plant_watered(2)
     except GardenError as error:
         print(f"Caught a garden error: {error}")
+
     try:
         is_water_tank_empty(0)
     except GardenError as error:
         print(f"Caught a garden error: {error}")
+
     print("\nAll custom error types work correctly!")
 
 
-if __name__ == "__main__":
+def main() -> None:
     print("=== Custom Garden Errors Demo ===\n")
+
     check_plants_health()
+
+
+if __name__ == "__main__":
+    main()

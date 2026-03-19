@@ -36,8 +36,9 @@ def prime_numbers_generator():
         n += 1
 
 
-if __name__ == "__main__":
+def main() -> None:
     print("=== Game Data Stream Processor ===\n")
+
     print("Processing 1000 game events...\n")
     stream = game_event_stream()
     total_events = 1000
@@ -82,3 +83,7 @@ if __name__ == "__main__":
         if n < values_count - 1:
             prime_numbers += ", "
     print(f"Prime number (first {values_count}): {prime_numbers}")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,12 +1,16 @@
 import sys
 
-if __name__ == "__main__":
+
+def main() -> None:
     print("=== Player Score Analytics ===")
+
     if len(sys.argv) == 1:
         print("No scores provided. Usage: python3 ft_score_analytics.py"
               " <score 1> <score 2> ...")
+
     else:
         args = sys.argv[1:]
+
         try:
             scores = []
             for arg in args:
@@ -18,5 +22,10 @@ if __name__ == "__main__":
             print(f"High score: {max(scores)}")
             print(f"Low score: {min(scores)}")
             print(f"Score range: {max(scores) - min(scores)}")
+
         except ValueError as error:
             print(f"Error: {error}")
+
+
+if __name__ == "__main__":
+    main()

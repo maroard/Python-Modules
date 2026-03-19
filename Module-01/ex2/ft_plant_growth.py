@@ -17,8 +17,9 @@ class Plant:
         return "Growth this week: +6cm"
 
 
-if __name__ == "__main__":
+def main() -> None:
     plants = [Plant("Rose", 25, 30)]
+
     print("=== Day 1 ===")
     for plant in plants:
         print(plant)
@@ -26,7 +27,12 @@ if __name__ == "__main__":
         for plant in plants:
             plant.grow()
             plant.aging()
+
     print("=== Day 7 ===")
     for plant in plants:
         print(plant)
     print(plants[0].get_info())
+
+
+if __name__ == "__main__":
+    main()

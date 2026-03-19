@@ -92,17 +92,20 @@ class GardenManager:
         return (True)
 
 
-if __name__ == "__main__":
+def main() -> None:
+    print("=== Garden Management System Demo ===\n")
+
     gardens = GardenManager.create_garden_network(["Alice", "Bob"])
     plants_1 = [Plant("Oak Tree", 100),
                 FloweringPlant("Rose", 25, "red"),
                 PrizeFlower("Sunflower", 50, "yellow", 10)]
     plants_2 = [Plant("Maple", 300)]
-    print("=== Garden Management System Demo ===\n")
+
     for plant in plants_1:
         gardens[0].add_plant(plant)
     for plant in plants_2:
         gardens[1].add_plant(plant)
+
     for garden in gardens:
         for plant in garden.plants_collection:
             if not garden.valid_height(plant.height):
@@ -110,10 +113,13 @@ if __name__ == "__main__":
                 break
             else:
                 valid_heights = True
+
     for garden in gardens:
         garden.grow_plants()
+
     for garden in gardens:
         garden.print_report()
+
     print(f"\nHeight validation test: {valid_heights}")
     garden_scores = []
     for garden in gardens:
@@ -130,3 +136,7 @@ if __name__ == "__main__":
               + ", " if i < len(gardens) - 1 else "\n")
         i += 1
     print(f"Total gardens managed: {len(gardens)}")
+
+
+if __name__ == "__main__":
+    main()

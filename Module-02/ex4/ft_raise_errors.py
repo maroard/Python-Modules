@@ -17,24 +17,33 @@ def check_plant_health(plant_name, water_level, sunlight_hours):
 def test_plant_checks():
     print("Testing good values...")
     check_plant_health("tomato", 3, 8)
+
     try:
         print("Testing empty plant name...")
         check_plant_health(None, 8, 4)
     except ValueError as error:
         print(f"Error: {error}\n")
+
     try:
         print("Testing bad water level...")
         check_plant_health("carrot", 15, 7)
     except ValueError as error:
         print(f"Error: {error}\n")
+
     try:
         print("Testing bad sunlight hours...")
         check_plant_health("lettuce", 3, 0)
     except ValueError as error:
         print(f"Error: {error}\n")
+
     print("All error raising tests completed!")
 
 
-if __name__ == "__main__":
+def main() -> None:
     print("=== Garden Plant Health Checker ===\n")
+
     test_plant_checks()
+
+
+if __name__ == "__main__":
+    main()

@@ -1,4 +1,4 @@
-if __name__ == "__main__":
+def main() -> None:
     print("=== Achievement Tracker System ===\n")
 
     alice = {"first_kill", "level_10", "treasure_hunter", "speed_demon"}
@@ -30,3 +30,7 @@ if __name__ == "__main__":
     print(f"Alice vs Bob common: {alice.intersection(bob)}")
     print(f"Alice unique: {alice.difference(bob)}")
     print(f"Bob unique: {bob.difference(alice)}")
+
+
+if __name__ == "__main__":
+    main()

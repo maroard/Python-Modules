@@ -23,6 +23,11 @@ def test_watering_system():
         print("\nCleanup always happens, even with errors!")
 
 
-if __name__ == "__main__":
+def main() -> None:
     print("=== Garden Watering System ===\n")
+
     test_watering_system()
+
+
+if __name__ == "__main__":
+    main()

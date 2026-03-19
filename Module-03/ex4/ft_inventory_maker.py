@@ -1,10 +1,13 @@
 import sys
 
-if __name__ == "__main__":
+
+def main() -> None:
     print("=== Inventory System Analysis ===")
+
     if len(sys.argv) == 1:
         print("No argument provided. Usage:"
               " python3 ft_inventory_system.py <item:quantity> ...")
+
     else:
         try:
             inventory = {}
@@ -50,7 +53,7 @@ if __name__ == "__main__":
                   f" ({most_abundant_qty} {most_unit_label})")
             print(f"Least abundant: {least_abundant_item}"
                   f" ({least_abundant_qty} {least_unit_label})")
-            
+
             print("\n=== Item Categories ===")
             moderate_items = {}
             scarce_items = {}
@@ -61,7 +64,7 @@ if __name__ == "__main__":
                     moderate_items.update({item: qty})
             print(f"Moderate: {moderate_items}")
             print(f"Scarce: {scarce_items}")
-            
+
             print("\n=== Management Suggestions ===")
             to_restock = ""
             count = 0
@@ -101,3 +104,7 @@ if __name__ == "__main__":
 
         except ValueError as error:
             print(f"Error: {error}")
+
+
+if __name__ == "__main__":
+    main()

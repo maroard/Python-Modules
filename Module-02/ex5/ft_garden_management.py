@@ -94,6 +94,11 @@ def test_garden_management():
     print("\nGarden management system test complete!")
 
 
-if __name__ == "__main__":
+def main() -> None:
     print("=== Garden Management System ===\n")
+
     test_garden_management()
+
+
+if __name__ == "__main__":
+    main()

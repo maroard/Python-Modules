@@ -8,10 +8,15 @@ class Plant:
         return (f"{self.name}: {self.height}cm, {self.age} days old")
 
 
-if __name__ == "__main__":
+def main() -> None:
     print("=== Garden Plant Registry ===")
+
     plants = [Plant("Rose", 25, 30),
               Plant("Sunflower", 80, 45),
               Plant("Cactus", 15, 120)]
     for plant in plants:
         print(plant)
+
+
+if __name__ == "__main__":
+    main()
