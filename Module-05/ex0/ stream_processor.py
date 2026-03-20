@@ -53,8 +53,8 @@ class LogProcessor(DataProcessor):
         log = data.split(':')
         level = log[0].strip()
         message = log[1].strip()
-        prefix = "[INFO] " if level == "INFO" else "[ALERT] "
-        return f"{prefix}{level} level detected: {message}"
+        prefix = "[INFO]" if level == "INFO" else "[ALERT]"
+        return f"{prefix} {level} level detected: {message}"
 
     def validate(self, data: Any) -> bool:
         if not isinstance(data, str) or len(data) == 0:
