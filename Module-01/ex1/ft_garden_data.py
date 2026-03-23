@@ -4,8 +4,8 @@ class Plant:
         self.height = height
         self.age = age
 
-    def __str__(self):
-        return (f"{self.name}: {self.height}cm, {self.age} days old")
+    def show(self):
+        print(f"{self.name}: {self.height}cm, {self.age} days old")
 
 
 def main() -> None:
@@ -15,7 +15,7 @@ def main() -> None:
               Plant("Sunflower", 80, 45),
               Plant("Cactus", 15, 120)]
     for plant in plants:
-        print(plant)
+        plant.show()
 
 
 if __name__ == "__main__":

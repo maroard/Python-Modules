@@ -4,9 +4,9 @@ def main() -> None:
     plant = "Rose"
     height = "25cm"
     age = "30 days"
-    print("Plant:", plant, "\nHeight:", height, "\nAge:", age)
+    print(f"Plant: {plant}\nHeight: {height}\nAge: {age}\n")
 
-    print("\n=== End of Program ===")
+    print("=== End of Program ===")
 
 
 if __name__ == "__main__":
