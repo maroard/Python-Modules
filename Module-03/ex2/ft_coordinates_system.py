@@ -1,42 +1,52 @@
-import sys
 import math
 
 
-def main() -> None:
-    print("=== Game Coordinate System ===\n")
+def get_player_pos() -> tuple[float, float, float]:
+    while True:
+        user_inp = input("Enter new coordinates as floats in format 'x,y,z': ")
+        coords = user_inp.split(",")
 
-    if len(sys.argv) == 1 or len(sys.argv) > 2:
-        print("No or too much coordinates provided. Usage:"
-              " python3 ft_coordinates_system.py <x,y,z>")
+        if len(coords) != 3:
+            print("Invalid syntax")
+            continue
 
-    else:
         try:
+            x = float(coords[0])
+            y = float(coords[1])
+            z = float(coords[2])
+            return (x, y, z)
+        except ValueError:
+            for coord in coords:
+                try:
+                    float(coord)
+                except ValueError as error:
+                    print(f"Error on parameter '{coord}': {error}")
+                    break
 
-            coords = sys.argv[1].split(",")
-            if len(coords) < 3 or len(coords) > 3:
-                raise IndexError
-            x = int(coords[0])
-            y = int(coords[1])
-            z = int(coords[2])
-            position = (x, y, z)
-            print(f"Parsing coordinates: \"{sys.argv[1]}\"")
-            print(f"Parsed position: {position}")
-            distance = math.sqrt((x - 0)**2 + (y - 0)**2 + (z - 0)**2)
-            print(f"Distance between (0, 0, 0) and {position}: {distance}\n")
 
-            print("Unpacking demonstration:")
-            print(f"Player at x={x}, y={y}, z={z}")
-            X, Y, Z = position
-            print(f"Coordinates: X={X}, Y={Y}, Z={Z}")
+def main() -> None:
+    print("=== Game Coordinate System ===")
 
-        except ValueError as error:
-            print(f"Parsing invalid coordinates: \"{sys.argv[1]}\"\n"
-                  f"Error parsing coordinates: {error}\n"
-                  f"Error details - Type: ValueError, Args: (\"{error}\",)")
+    print("Get a first set of coordinates")
+    first_pos = get_player_pos()
+    print(f"Got a first tuple: {first_pos}")
 
-        except IndexError:
-            print(f"Error: {len(coords)} coordinate(s) given, but 3 needed"
-                  " (x, y, z)")
+    x, y, z = first_pos
+    print(f"It includes: X={x}, Y={y}, Z={z}")
+
+    distance_center = math.sqrt((x - 0)**2 + (y - 0)**2 + (z - 0)**2)
+    print(f"Distance to center: {round(distance_center, 4)}")
+
+    print("Get a second set of coordinates")
+    second_pos = get_player_pos()
+
+    distance_between = math.sqrt(
+        (second_pos[0] - first_pos[0]) ** 2
+        + (second_pos[1] - first_pos[1]) ** 2
+        + (second_pos[2] - first_pos[2]) ** 2
+    )
+    print(f"Distance between the 2 sets of coordinates: "
+          f"{round(distance_between, 4)}")
 
 
 if __name__ == "__main__":

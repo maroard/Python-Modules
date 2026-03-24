@@ -1,35 +1,63 @@
+import random
+
+
+def gen_player_achievements() -> set[str]:
+    all_achievements = [
+        "First Steps",
+        "Boss Slayer",
+        "Master Explorer",
+        "Collector Supreme",
+        "Untouchable",
+        "Strategist",
+        "World Savior",
+        "Speed Runner",
+        "Survivor",
+        "Treasure Hunter",
+        "Sharp Mind",
+        "Unstoppable",
+        "Crafting Genius",
+        "Hidden Path Finder",
+    ]
+
+    count = random.randint(5, 9)
+    return set(random.sample(all_achievements, count))
+
+
 def main() -> None:
-    print("=== Achievement Tracker System ===\n")
+    print("=== Achievement Tracker System ===")
 
-    alice = {"first_kill", "level_10", "treasure_hunter", "speed_demon"}
-    bob = {"first_kill", "level_10", "boss_slayer", "collector"}
-    charlie = {"level_10", "treasure_hunter", "boss_slayer", "speed_demon",
-               "perfectionist"}
-    print(f"Player alice achievements: {alice}")
-    print(f"Player bob achievements: {bob}")
-    print(f"Player charlie achievements: {charlie}")
+    players = {
+        "Alice": gen_player_achievements(),
+        "Bob": gen_player_achievements(),
+        "Charlie": gen_player_achievements(),
+        "Dylan": gen_player_achievements(),
+    }
 
-    print("\n=== Achievement Analytics ===")
+    for name, achievements in players.items():
+        print(f"Player {name}: {achievements}")
 
-    achievements = alice.union(bob).union(charlie)
-    print(f"All unique achievements: {achievements}")
-    print(f"Total unique achievements: {len(achievements)}\n")
+    all_distinct = set()
+    for achievements in players.values():
+        all_distinct = all_distinct | achievements
+    print(f"All distinct achievements: {all_distinct}")
 
-    common_achievements = alice.intersection(bob).intersection(charlie)
-    rare_achievements = set()
-    for achievement in achievements:
-        occurrence = 0
-        for player in [alice, bob, charlie]:
-            if achievement in player:
-                occurrence += 1
-        if occurrence == 1:
-            rare_achievements.add(achievement)
-    print(f"Common to all players: {common_achievements}")
-    print(f"Rare achievements (1 player): {rare_achievements}\n")
+    common_achievements = None
+    for achievements in players.values():
+        if common_achievements is None:
+            common_achievements = achievements
+        else:
+            common_achievements = common_achievements & achievements
+    print(f"Common achievements: {common_achievements}")
 
-    print(f"Alice vs Bob common: {alice.intersection(bob)}")
-    print(f"Alice unique: {alice.difference(bob)}")
-    print(f"Bob unique: {bob.difference(alice)}")
+    for name, achievements in players.items():
+        others_union = set()
+        for other_name, other_achievements in players.items():
+            if other_name != name:
+                others_union = others_union | other_achievements
+        print(f"Only {name} has: {achievements - others_union}")
+
+    for name, achievements in players.items():
+        print(f"{name} is missing: {all_distinct - achievements}")
 
 
 if __name__ == "__main__":

@@ -16,10 +16,10 @@ class Plant:
         else:
             self._age = age
 
-    def show(self):
+    def show(self) -> None:
         print(f"{self.name}: {self._height:.1f}cm, {self._age} days old")
 
-    def set_height(self, value):
+    def set_height(self, value) -> None:
         if value < 0:
             print(f"{self.name}: Error, height can't be negative")
             print("Height update rejected")
@@ -27,10 +27,10 @@ class Plant:
         self._height = round(value, 1)
         print(f"Height updated: {value}cm")
 
-    def get_height(self):
+    def get_height(self) -> int:
         return self._height
 
-    def set_age(self, value):
+    def set_age(self, value) -> None:
         if value < 0:
             print(f"{self.name}: Error, age can't be negative")
             print("Age update rejected")
@@ -38,11 +38,11 @@ class Plant:
         self._age = value
         print(f"Age updated: {value} days")
 
-    def get_age(self):
+    def get_age(self) -> int:
         return self._age
 
 
-def main():
+def main() -> None:
     print("=== Garden Security System ===")
 
     plant = Plant("Rose", 15, 10)

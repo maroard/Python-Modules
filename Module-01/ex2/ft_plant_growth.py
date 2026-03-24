@@ -4,16 +4,16 @@ class Plant:
         self.height = height
         self.age = age
 
-    def show(self):
+    def show(self) -> None:
         print(f"{self.name}: {self.height:.1f}cm, {self.age} days old")
 
-    def grow(self):
+    def grow(self) -> None:
         self.height = round(self.height + 0.8, 1)
 
-    def aging(self):
+    def aging(self) -> None:
         self.age += 1
 
-    def get_info(self):
+    def get_info(self) -> str:
         return "Growth this week: 6cm"
 
 

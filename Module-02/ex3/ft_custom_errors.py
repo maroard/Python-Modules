@@ -10,39 +10,37 @@ class WaterError(GardenError):
     pass
 
 
-def is_tomato_plant_watered(water_level: int):
-    min_threshold = 3
-    if water_level < min_threshold:
+def check_plant_health(water_level: int) -> None:
+    if water_level < 3:
         raise PlantError("The tomato plant is wilting!")
 
 
-def is_water_tank_empty(water_level: int):
-    min_threshold = 1
-    if water_level < min_threshold:
+def check_water_tank(water_level: int) -> None:
+    if water_level < 1:
         raise WaterError("Not enough water in the tank!")
 
 
-def check_plants_health():
+def test_custom_errors() -> None:
     try:
         print("Testing PlantError...")
-        is_tomato_plant_watered(2)
+        check_plant_health(2)
     except PlantError as error:
         print(f"Caught PlantError: {error}\n")
 
     try:
         print("Testing WaterError...")
-        is_water_tank_empty(0)
+        check_water_tank(0)
     except WaterError as error:
         print(f"Caught WaterError: {error}\n")
 
     print("Testing catching all garden errors...")
     try:
-        is_tomato_plant_watered(2)
+        check_plant_health(2)
     except GardenError as error:
         print(f"Caught a garden error: {error}")
 
     try:
-        is_water_tank_empty(0)
+        check_water_tank(0)
     except GardenError as error:
         print(f"Caught a garden error: {error}")
 
@@ -52,7 +50,7 @@ def check_plants_health():
 def main() -> None:
     print("=== Custom Garden Errors Demo ===\n")
 
-    check_plants_health()
+    test_custom_errors()
 
 
 if __name__ == "__main__":
