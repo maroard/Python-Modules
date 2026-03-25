@@ -63,6 +63,8 @@ class SensorStream(DataStream):
     def process_batch(self, data_batch: List[Any]) -> str:
         self.type = "Environmental Data"
         self.processed_data = len(data_batch)
+        self.extreme_temp = 0
+        self.avg_temp = 0
 
         values = []
         filtered_batch = self.filter_data(data_batch, "temp:")
@@ -72,8 +74,6 @@ class SensorStream(DataStream):
         except ValueError:
             raise ValueError("invalid data")
 
-        self.extreme_temp = 0
-        self.avg_temp = 0
         total_temp = 0
         if len(values) > 0:
             for value in values:
@@ -104,6 +104,8 @@ class TransactionStream(DataStream):
     def process_batch(self, data_batch: List[Any]) -> str:
         self.type = "Financial Data"
         self.processed_data = len(data_batch)
+        self.net_flow = 0
+        self.large_trans = 0
 
         values = []
         try:
@@ -122,8 +124,6 @@ class TransactionStream(DataStream):
         except ValueError:
             raise ValueError("invalid data")
 
-        self.net_flow = 0
-        self.large_trans = 0
         for value in values:
             self.net_flow += value
             if value >= 500 or value <= -500:
@@ -152,6 +152,7 @@ class EventStream(DataStream):
     def process_batch(self, data_batch: List[Any]) -> str:
         self.type = "System Events"
         self.processed_data = len(data_batch)
+        self.errors_count = 0
 
         for element in data_batch:
             if not isinstance(element, str):
@@ -159,7 +160,6 @@ class EventStream(DataStream):
             if element not in ["login", "logout", "error"]:
                 raise ValueError("unknown event")
 
-        self.errors_count = 0
         for element in data_batch:
             if element == "error":
                 self.errors_count += 1
