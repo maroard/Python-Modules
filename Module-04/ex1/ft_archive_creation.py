@@ -15,6 +15,7 @@ def main() -> None:
         print(data)
         f.write(data)
 
+    print()
     print("Data inscription complete. Storage unit sealed.")
     print("Archive 'new_discovery.txt' ready for long-term preservation.")
 

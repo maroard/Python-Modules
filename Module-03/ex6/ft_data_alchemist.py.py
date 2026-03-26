@@ -15,6 +15,7 @@ def main() -> None:
         "kevin",
         "Liam",
     ]
+    print()
     print(f"Initial list of players: {players}")
 
     capitalized_players = [player.capitalize() for player in players]
@@ -25,6 +26,7 @@ def main() -> None:
     ]
     print(f"New list of capitalized names only: {already_capitalized}")
 
+    print()
     score_dict = {
         player: random.randint(0, 1000) for player in capitalized_players
     }

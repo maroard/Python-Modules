@@ -33,14 +33,17 @@ def main() -> None:
         "Dylan": gen_player_achievements(),
     }
 
+    print()
     for name, achievements in players.items():
         print(f"Player {name}: {achievements}")
 
+    print()
     all_distinct = set()
     for achievements in players.values():
         all_distinct = all_distinct | achievements
     print(f"All distinct achievements: {all_distinct}")
 
+    print()
     common_achievements = None
     for achievements in players.values():
         if common_achievements is None:
@@ -49,6 +52,7 @@ def main() -> None:
             common_achievements = common_achievements & achievements
     print(f"Common achievements: {common_achievements}")
 
+    print()
     for name, achievements in players.items():
         others_union = set()
         for other_name, other_achievements in players.items():
@@ -56,6 +60,7 @@ def main() -> None:
                 others_union = others_union | other_achievements
         print(f"Only {name} has: {achievements - others_union}")
 
+    print()
     for name, achievements in players.items():
         print(f"{name} is missing: {all_distinct - achievements}")
 
