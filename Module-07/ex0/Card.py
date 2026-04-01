@@ -21,7 +21,7 @@ class Card(ABC):
             self.rarity = rarity
 
     @abstractmethod
-    def play(self, game_stats: dict) -> dict:
+    def play(self, game_state: dict) -> dict:
         pass
 
     def get_card_info(self) -> dict:
