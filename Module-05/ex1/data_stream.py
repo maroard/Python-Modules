@@ -192,8 +192,8 @@ class StreamProcessor():
         large_trans = 0
         errors_count = 0
 
-        for stream in self.streams:
-            stream.process_batch(data_batches[i])
+        for stream, data_batch in zip(self.streams, data_batches):
+            stream.process_batch(data_batch)
             stats = stream.get_stats()
 
             type = stats["type"]
