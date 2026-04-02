@@ -1,7 +1,7 @@
 from ex0.CreatureCard import CreatureCard
 from ex1.Deck import Deck
 from ex1.ArtifactCard import ArtifactCard
-from ex1.Spellcard import SpellCard
+from ex1.SpellCard import SpellCard
 
 
 if __name__ == "__main__":
