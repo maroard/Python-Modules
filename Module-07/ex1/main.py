@@ -29,7 +29,7 @@ if __name__ == "__main__":
         card = deck.draw_card()
         card_info = card.get_card_info()
 
-        print(f"Drew: {card_info["name"]} ({card_info["type"]})")
+        print(f"Drew: {card_info['name']} ({card_info['type']})")
         print(f"Play result: {card.play()}")
 
     print()

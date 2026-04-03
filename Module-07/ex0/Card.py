@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from enum import Enum
+from typing import Dict
 
 
 class Rarity(Enum):
@@ -21,10 +22,10 @@ class Card(ABC):
             self.rarity = rarity
 
     @abstractmethod
-    def play(self, game_state: dict) -> dict:
+    def play(self, game_state: Dict) -> Dict:
         pass
 
-    def get_card_info(self) -> dict:
+    def get_card_info(self) -> Dict:
         return {
             "name": self.name,
             "cost": self.cost,

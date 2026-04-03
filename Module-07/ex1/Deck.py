@@ -1,5 +1,5 @@
 from ex0.Card import Card
-from typing import List
+from typing import List, Dict
 from random import shuffle
 
 
@@ -55,7 +55,7 @@ class Deck():
 
         return drew_card
 
-    def get_deck_stats(self) -> dict:
+    def get_deck_stats(self) -> Dict:
         avg_cost = round(sum(card.get_card_info()["cost"]
                              for card in self.cards) / self.total_cards, 1)
 

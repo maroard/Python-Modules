@@ -11,16 +11,14 @@ class GameEngine():
         self.strategy = strategy
 
         datadeck = factory.create_themed_deck(20)
-        self.deck = Deck(datadeck["creatures"]
-                         + datadeck["spells"]
-                         + datadeck["artifacts"])
+        self.deck = Deck(datadeck["deck"])
 
         self.hand = []
-        for _ in range(5):
+        for _ in range(10):
             self.hand.append(self.deck.draw_card())
 
         self.battlefield = []
-        for _ in range(0):
+        for _ in range(5):
             self.battlefield.append(self.deck.draw_card())
 
         self.turns_simulated = 0

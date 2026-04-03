@@ -1,5 +1,6 @@
 from enum import Enum
 from ex0.Card import Card
+from typing import Dict, List
 
 
 class EffectType(Enum):
@@ -29,14 +30,14 @@ class SpellCard(Card):
         else:
             self.effect = "Decrease target's Attack by 1"
 
-    def play(self, game_state: dict = {}) -> dict:
+    def play(self, game_state: Dict = {}) -> Dict:
         return {
             "card_played": self.name,
             "mana_used": self.cost,
             "effect": self.effect
         }
 
-    def resolve_effect(self, targets: list[Card]) -> dict:
+    def resolve_effect(self, targets: List[Card]) -> Dict:
         spell_recap = {}
         spell_recap["targets"] = []
         spell_recap["effects"] = []
@@ -91,7 +92,7 @@ class SpellCard(Card):
 
         return spell_recap
 
-    def get_card_info(self) -> dict:
+    def get_card_info(self) -> Dict:
         card_info = super().get_card_info()
         card_info["type"] = "Spell"
         card_info["effect_type"] = self.effect_type

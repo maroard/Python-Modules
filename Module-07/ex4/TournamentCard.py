@@ -1,26 +1,29 @@
 from ex0.Card import Card
 from ex2.Combatable import Combatable
-from ex2.Magical import Magical
+from ex4.Rankable import Rankable
 from typing import Dict
 
 
-class EliteCard(Card, Combatable, Magical):
+class TournamentCard(Card, Combatable, Rankable):
     def __init__(self, name: str, cost: int, rarity: str,
                  attack_dmg: int, health: int, combat_type: str, armor: int,
-                 spells: Dict[str, int]):
+                 card_id: str, rating: int):
         super().__init__(name, cost, rarity)
+
         self.attack_dmg = attack_dmg
         self.health = health
         self.combat_type = combat_type
         self.armor = armor
-        self.spells = spells
-        self.mana = 8
 
-    def play(self, game_state: Dict) -> Dict:
+        self.id = card_id
+        self.rating = rating
+        self.record = {"wins": 0, "losses": 0}
+
+    def play(self, game_state: Dict = {}) -> Dict:
         return {
             "card_played": self.name,
             "mana_used": self.cost,
-            "effect": "EliteCard summoned to battlefield"
+            "effect": "TournamentCard summoned to arena"
         }
 
     def attack(self, target: Card) -> Dict:
@@ -52,44 +55,49 @@ class EliteCard(Card, Combatable, Magical):
             "combat_type": self.combat_type
         }
 
-    def cast_spell(self, spell_name: str, targets: list[Card]) -> Dict:
-        if spell_name in self.spells:
-            has_enough_mana = self.spells[spell_name] <= self.mana
-            if has_enough_mana:
-                mana_used = self.spells[spell_name]
-                self.mana -= mana_used
-                spell_label = f"{spell_name}"
-            else:
-                mana_used = 0
-                spell_label = f"{spell_name} (insufficient mana)"
+    def update_wins(self, wins: int) -> None:
+        self.record["wins"] += wins
+
+    def update_losses(self, losses: int) -> None:
+        self.record["losses"] += losses
+
+    def calculate_rating(self) -> int:
+        self.rating += self.record["wins"] * 16 - self.record["losses"] * 16
+
+        return self.rating
+
+    def get_rank_info(self) -> Dict:
+        ranks = ["Novice", "Brave", "Elite", "Champion", "Arena Legend"]
+
+        if self.rating < 1200:
+            rank = ranks[0]
+        elif self.rating >= 1200 and self.rating < 2000:
+            rank = ranks[1]
+        elif self.rating >= 2000 and self.rating < 3000:
+            rank = ranks[2]
+        elif self.rating >= 3000 and self.rating < 5000:
+            rank = ranks[3]
         else:
-            mana_used = 0
-            spell_label = f"{spell_name} (unknown spell)"
+            rank = ranks[4]
+
         return {
-            "caster": self.name,
-            "spell": spell_label,
-            "targets": [target.get_card_info()["name"] for target in targets],
-            "mana_used": mana_used
+            "rank": rank,
+            "rating": self.rating
         }
 
-    def channel_mana(self, amount: int) -> Dict:
-        self.mana += amount
-
+    def get_tournament_stats(self) -> Dict:
         return {
-            "channeled": amount,
-            "total_mana": self.mana
-        }
-
-    def get_magic_stats(self) -> Dict:
-        return {
-            "mana_remaining": self.mana,
-            "spells": self.spells
+            "id": self.id,
+            "elo_gain": self.record["wins"] * 16 - self.record["losses"] * 16,
+            "wins": self.record["wins"],
+            "losses": self.record["losses"]
         }
 
     def get_card_info(self) -> Dict:
         card_info = super().get_card_info()
-        card_info["type"] = "Elite Card"
+        card_info["type"] = "Tournament Card"
         card_info.update(self.get_combat_stats())
-        card_info.update(self.get_magic_stats())
+        card_info.update(self.get_rank_info())
+        card_info.update(self.get_tournament_stats())
 
         return card_info

@@ -1,4 +1,5 @@
 from ex0.Card import Card
+from typing import Dict
 
 
 class CreatureCard(Card):
@@ -11,14 +12,14 @@ class CreatureCard(Card):
         else:
             raise ValueError("Attack and Health must be positive integers!")
 
-    def play(self, game_state: dict = {}) -> dict:
+    def play(self, game_state: Dict = {}) -> Dict:
         return {
             "card_played": self.name,
             "mana_used": self.cost,
             "effect": "Creature summoned to battlefield"
         }
 
-    def attack_target(self, target: Card) -> dict:
+    def attack_target(self, target: Card) -> Dict:
         return {
             "attacker": self.name,
             "target": target.name,
@@ -26,7 +27,7 @@ class CreatureCard(Card):
             "combat_resolved": self.attack >= target.health
         }
 
-    def get_card_info(self) -> dict:
+    def get_card_info(self) -> Dict:
         card_info = super().get_card_info()
         card_info["type"] = "Creature"
         card_info["attack"] = self.attack

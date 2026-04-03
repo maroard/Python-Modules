@@ -28,35 +28,36 @@ class FantasyCardFactory(CardFactory):
             return ArtifactCard("Enchanted Shield", 3, "Uncommon", 5,
                                 "Permanent: reduce incoming damage by 1")
 
-    def create_themed_deck(self, size: int) -> Dict[Card]:
+    def create_themed_deck(self, size: int) -> Dict:
         creatures = ["Fire Dragon", "Goblin Warrior"]
         spells = ["Lightning Bolt", "Fireball"]
         artifacts = ["Mana Crystal", "Enchanted Shield"]
 
         cards_in_deck = []
 
-        for _ in range(size):
-            selected_type = random.choice(["Creature", "Spell", "Artifact"])
+        creatures_in_deck = int(size * 0.5)
+        spells_in_deck = int(size * 0.3)
+        artifacts_in_deck = size - (creatures_in_deck + spells_in_deck)
 
-            if selected_type == "Creature":
-                cards_in_deck.append(
-                    self.create_creature(random.choice(creatures)))
-            elif selected_type == "Spell":
-                cards_in_deck.append(
-                    self.create_spell(random.choice(spells)))
-            else:
-                cards_in_deck.append(
-                    self.create_artifact(random.choice(artifacts)))
+        for _ in range(creatures_in_deck):
+            cards_in_deck.append(
+                self.create_creature(random.choice(creatures)))
+        for _ in range(spells_in_deck):
+            cards_in_deck.append(
+                self.create_spell(random.choice(spells)))
+        for _ in range(artifacts_in_deck):
+            cards_in_deck.append(
+                self.create_artifact(random.choice(artifacts)))
+
+        random.shuffle(cards_in_deck)
 
         return {
-            "creatures": [card for card in cards_in_deck
-                          if card.get_card_info()["type"] == "Creature"],
-            "spells": [card for card in cards_in_deck
-                       if card.get_card_info()["type"] == "Spell"],
-            "artifacts": [card for card in cards_in_deck
-                          if card.get_card_info()["type"] == "Artifact"],
+            "deck": cards_in_deck,
             "total_cards": size
         }
+
+    def get_factory_name(self) -> str:
+        return "FantasyCardFactory"
 
     def get_supported_types(self) -> Dict:
         return {

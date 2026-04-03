@@ -15,15 +15,17 @@ class AgressiveStrategy(GameStrategy):
             cards_to_play.remove(most_expensive_card)
 
         for card in cards_to_play:
-            card.play()
+            card.play(None)
 
         valid_targets = [target for target in battlefield
                          if target.get_card_info()["type"] != "Spell"]
+
+        damage_dealt = 0
         if valid_targets:
             targets = self.prioritize_targets(valid_targets)
 
             targets_attacked = []
-            damage_dealt = 0
+            last_target_attacked = None
             i = 0
             for card in cards_to_play:
                 card_info = card.get_card_info()
@@ -31,23 +33,37 @@ class AgressiveStrategy(GameStrategy):
                 if card_info["type"] == "Creature":
                     card.attack_target(targets[i])
                     damage_dealt += card_info["attack"]
-                elif card_info["type"] == "Spell":
+                else:
                     card.resolve_effect([targets[i]])
                     damage_dealt += 3
-                if targets[i] != targets_attacked[len(targets_attacked)]:
+                if targets[i] != last_target_attacked:
                     targets_attacked.append(targets[i])
+                last_target_attacked = targets[i]
                 if target_info["type"] == "Creature":
                     if targets[i].health <= 0:
+                        if i == len(targets) - 1:
+                            break
                         i += 1
                 elif targets[i].durability <= 0:
+                    if i == len(targets) - 1:
+                        break
                     i += 1
+        else:
+            for card in cards_to_play:
+                card_info = card.get_card_info()
+
+                if card_info["type"] == "Creature":
+                    damage_dealt += card_info["attack"]
+                else:
+                    damage_dealt += 3
 
         return {
             "cards_played": [card.get_card_info()["name"]
                              for card in cards_to_play],
             "mana_used": sum([card.get_card_info()["cost"]
                               for card in cards_to_play]),
-            "targets_attacked": targets_attacked if battlefield
+            "targets_attacked": [target.get_card_info()["name"]
+                                 for target in targets_attacked] if battlefield
             else ["Enemy Player"],
             "damage_dealt": damage_dealt
         }
