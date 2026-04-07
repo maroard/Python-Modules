@@ -30,7 +30,12 @@ def main() -> None:
         print("API Access: Authenticated")
     else:
         print("API Access: Unable to authenticate")
-    print(f"Log Level: {log_level}")
+    if log_level is None and mode == "development":
+        print("Log Level: DEBUG")
+    elif log_level is None and mode == "production":
+        print("Log Level: WARNING")
+    else:
+        print(f"Log Level: {log_level}")
     if zion_network is not None:
         print("Zion Network: Online")
     else:
