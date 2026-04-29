@@ -21,8 +21,7 @@ class SpaceStation(BaseModel):
             f"Power: {self.power_level}%\n"
             f"Oxygen: {self.oxygen_level}%\n"
             "Status: "
-            f"{'Operational' if self.is_operational
-                else 'In maintenance'}"
+            "Operational" if self.is_operational else "In maintenance"
         )
 
 
