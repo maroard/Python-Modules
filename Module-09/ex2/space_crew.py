@@ -76,14 +76,14 @@ def main() -> None:
         mission_id="M2024_MARS",
         mission_name="Mars Colony Establishment",
         destination="Mars",
-        launch_date="2024-04-10T10:30:00",
+        launch_date=datetime.fromisoformat("2024-04-10T10:30:00"),
         duration_days=900,
         budget_millions=2500.0,
         crew=[
             CrewMember(
                 member_id="SC_001",
                 name="Sarah Connor",
-                rank="commander",
+                rank=Rank.commander,
                 age=37,
                 specialization="Mission Command",
                 years_experience=17,
@@ -91,7 +91,7 @@ def main() -> None:
             CrewMember(
                 member_id="JS_001",
                 name="John Smith",
-                rank="lieutenant",
+                rank=Rank.lieutenant,
                 age=31,
                 specialization="Navigation",
                 years_experience=11,
@@ -99,7 +99,7 @@ def main() -> None:
             CrewMember(
                 member_id="AJ_001",
                 name="Alice Johnson",
-                rank="officer",
+                rank=Rank.officer,
                 age=26,
                 specialization="Engineering",
                 years_experience=3,
@@ -119,14 +119,14 @@ def main() -> None:
             mission_id="M2025_MARS",
             mission_name="Mars Colony Establishment",
             destination="Mars",
-            launch_date="2025-04-10T10:30:00",
+            launch_date=datetime.fromisoformat("2025-04-10T10:30:00"),
             duration_days=900,
             budget_millions=2500.0,
             crew=[
                 CrewMember(
                     member_id="SC_001",
                     name="Sarah Connor",
-                    rank="lieutenant",
+                    rank=Rank.lieutenant,
                     age=37,
                     specialization="Mission Command",
                     years_experience=17,
@@ -134,7 +134,7 @@ def main() -> None:
                 CrewMember(
                     member_id="JS_001",
                     name="John Smith",
-                    rank="officer",
+                    rank=Rank.officer,
                     age=31,
                     specialization="Navigation",
                     years_experience=11,
@@ -142,7 +142,7 @@ def main() -> None:
                 CrewMember(
                     member_id="AJ_001",
                     name="Alice Johnson",
-                    rank="cadet",
+                    rank=Rank.cadet,
                     age=26,
                     specialization="Engineering",
                     years_experience=3,
