@@ -1,8 +1,13 @@
 from collections.abc import Callable
-from typing import Any
+from typing import TypedDict, Any
 
 
-def mage_counter() -> Callable:
+class MemoryVault(TypedDict):
+    store: Callable[[str, Any], None]
+    recall: Callable[[str], Any]
+
+
+def mage_counter() -> Callable[[], int]:
     call_count = 0
 
     def counter() -> int:
@@ -14,7 +19,7 @@ def mage_counter() -> Callable:
     return counter
 
 
-def spell_accumulator(initial_power: int) -> Callable:
+def spell_accumulator(initial_power: int) -> Callable[[int], int]:
     total_power = initial_power
 
     def accumulator(additional_power: int) -> int:
@@ -26,15 +31,15 @@ def spell_accumulator(initial_power: int) -> Callable:
     return accumulator
 
 
-def enchantment_factory(enchantment_type: str) -> Callable:
+def enchantment_factory(enchantment_type: str) -> Callable[[str], str]:
     def new_item(item_name: str) -> str:
         return ' '.join([enchantment_type, item_name])
 
     return new_item
 
 
-def memory_vault() -> dict[str, Callable]:
-    memory = {}
+def memory_vault() -> MemoryVault:
+    memory: dict[str, Any] = {}
 
     def store(key: str, value: Any) -> None:
         memory[key] = value
